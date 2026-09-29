@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio | Nama Kamu</title>
+    <title>Portofolio | Nafil</title>
     
-    <!-- Menggunakan font Google 'Poppins' agar terlihat modern -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Menggunakan font Google 'JetBrains Mono' dan 'Poppins' untuk kesan teknis & modern -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* === PENGATURAN DASAR & WARNA (CSS VARIABLES) === */
+        /* === TEMA ELEKTRONIKA (DARK MODE & HIJAU PCB) === */
         :root {
-            --primary-color: #2563eb; /* Warna Biru Utama */
-            --secondary-color: #1e40af; /* Warna Biru Gelap untuk hover */
-            --bg-color: #f8fafc; /* Warna latar belakang abu-abu sangat terang */
-            --text-color: #334155; /* Warna teks utama */
-            --text-light: #64748b; /* Warna teks sekunder */
-            --white: #ffffff;
+            --primary-color: #10b981; /* Hijau Terang ala Lampu LED / PCB */
+            --secondary-color: #059669; /* Hijau Gelap */
+            --bg-color: #0f172a; /* Biru Sangat Gelap */
+            --card-bg: #1e293b; /* Warna latar untuk kotak/kartu */
+            --text-color: #f1f5f9; /* Putih Terang */
+            --text-light: #94a3b8; /* Abu-abu terang */
+            --accent: #38bdf8; /* Biru aksen */
         }
 
         * {
@@ -28,9 +29,20 @@
 
         body {
             background-color: var(--bg-color);
+            /* Efek Grid/Garis ala Blueprint atau Kertas Milimeter Blok */
+            background-image: 
+                linear-gradient(rgba(16, 185, 129, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(16, 185, 129, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
             color: var(--text-color);
             line-height: 1.6;
-            scroll-behavior: smooth; /* Efek scroll halus */
+            scroll-behavior: smooth;
+        }
+
+        /* Font khusus untuk elemen teknis (kode/angka) */
+        .tech-font {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary-color);
         }
 
         .container {
@@ -39,10 +51,11 @@
             padding: 0 20px;
         }
 
-        /* === NAVBAR (HEADER) === */
+        /* === NAVBAR === */
         header {
-            background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -60,6 +73,9 @@
             font-weight: 700;
             color: var(--primary-color);
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .nav-links {
@@ -79,24 +95,17 @@
             color: var(--primary-color);
         }
 
-        /* Menu hamburger untuk HP */
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-color); }
 
         /* === SECTION UMUM === */
-        section {
-            padding: 80px 0;
-        }
-
+        section { padding: 100px 0; }
         .section-title {
             text-align: center;
-            font-size: 2rem;
-            margin-bottom: 40px;
-            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            color: var(--text-color);
         }
+        .section-title span { color: var(--primary-color); }
 
         /* === HERO SECTION === */
         #hero {
@@ -105,50 +114,60 @@
             justify-content: center;
             text-align: center;
             min-height: 80vh;
-            background: linear-gradient(135deg, #e0e7ff 0%, #ffffff 100%);
         }
 
         .hero-content h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
         }
 
         .hero-content h2 {
-            font-size: 1.5rem;
-            color: var(--text-light);
-            margin-bottom: 20px;
-            font-weight: 400;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .btn {
             display: inline-block;
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 12px 24px;
-            border-radius: 50px;
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 12px 28px;
+            border-radius: 5px; /* Sudut kotak ala komponen elektronik */
             text-decoration: none;
             font-weight: 600;
-            transition: background 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.1);
         }
 
         .btn:hover {
-            background-color: var(--secondary-color);
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
         }
 
         /* === TENTANG SAYA === */
         .about-content {
             display: flex;
             align-items: center;
-            gap: 40px;
+            gap: 50px;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary-color);
         }
 
         .about-image img {
-            width: 300px;
-            height: 300px;
+            width: 250px;
+            height: 250px;
             object-fit: cover;
-            border-radius: 50%;
-            border: 5px solid var(--white);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            border: 2px solid var(--primary-color);
         }
 
         /* === KEAHLIAN (SKILLS) === */
@@ -160,119 +179,85 @@
         }
 
         .skill-tag {
-            background-color: var(--white);
-            padding: 10px 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            background-color: var(--card-bg);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 12px 24px;
+            border-radius: 5px;
             font-weight: 600;
-            color: var(--primary-color);
+            color: var(--text-color);
+            transition: all 0.3s;
         }
 
-        /* === PORTOFOLIO & EKSKUL (GRID LAYOUT) === */
+        .skill-tag:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* === GRID UNTUK PROYEK & EKSKUL === */
         .grid-layout {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
         }
 
         .card {
-            background: var(--white);
+            background: var(--card-bg);
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
 
-        .card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
+        .card img { width: 100%; height: 220px; object-fit: cover; border-bottom: 2px solid var(--primary-color); }
+        .card-content { padding: 25px; }
+        .card-title { font-size: 1.3rem; margin-bottom: 15px; color: var(--text-color); }
+        .card-desc { color: var(--text-light); margin-bottom: 25px; font-size: 0.95rem; }
 
-        .card-content {
-            padding: 20px;
-        }
-
-        .card-title {
-            font-size: 1.25rem;
-            margin-bottom: 10px;
-        }
-
-        .card-desc {
-            color: var(--text-light);
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-
-        /* === FOOTER / KONTAK === */
+        /* === FOOTER === */
         footer {
-            background-color: var(--text-color);
-            color: var(--white);
+            background-color: rgba(15, 23, 42, 0.95);
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
             text-align: center;
-            padding: 40px 0;
-        }
-
-        .social-links {
-            margin-bottom: 20px;
+            padding: 60px 20px;
         }
 
         .social-links a {
-            color: var(--white);
+            color: var(--text-color);
             text-decoration: none;
-            margin: 0 10px;
+            margin: 0 15px;
             font-size: 1.1rem;
             transition: color 0.3s;
         }
 
-        .social-links a:hover {
-            color: #93c5fd;
-        }
+        .social-links a:hover { color: var(--primary-color); }
 
-        /* === RESPONSIVE (Untuk HP) === */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none; /* Sembunyikan menu desktop */
-                flex-direction: column;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: var(--white);
-                padding: 20px;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-            }
-            
-            .nav-links.active {
-                display: flex;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .about-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .hero-content h1 {
-                font-size: 2.2rem;
-            }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 70px; left: 0; width: 100%; background: var(--card-bg); padding: 20px; text-align: center;}
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: block; }
+            .about-content { flex-direction: column; text-align: center; padding: 20px;}
+            .hero-content h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- === HEADER / NAVBAR === -->
+    <!-- NAVBAR -->
     <header>
         <div class="container">
             <nav>
-                <!-- GANTI TEKS INI DENGAN NAMA KAMU -->
-                <a href="#" class="logo">Portofolio.</a>
+                <a href="#" class="logo">
+                    <!-- Icon Petir (Elektronika) -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    Budi.
+                </a>
                 
                 <div class="menu-toggle" id="mobile-menu">☰</div>
                 
@@ -281,108 +266,103 @@
                     <li><a href="#tentang">Tentang</a></li>
                     <li><a href="#keahlian">Keahlian</a></li>
                     <li><a href="#portofolio">Proyek</a></li>
-                    <li><a href="#ekskul">Ekskul</a></li>
-                    <li><a href="#kontak">Kontak</a></li>
+                    <li><a href="#ekskul">Organisasi</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- === HERO SECTION === -->
+    <!-- HERO SECTION -->
     <section id="hero">
         <div class="container hero-content">
-            <!-- GANTI TEKS DI BAWAH SESUAI DATA DIRIMU -->
-            <h2>Halo, Selamat Datang! Saya</h2>
-            <h1>Budi Santoso</h1>
-            <h2>Siswa SMK Jurusan Rekayasa Perangkat Lunak</h2>
+            <h2 class="tech-font">&lt; Hello_World /&gt;</h2>
+            <h1>Muhammad Nafil</h1>
+            <h2 class="tech-font">Teknisi Elektronika & IoT Enthusiast</h2>
             <p style="margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; color: var(--text-light);">
-                Saya adalah siswa SMK yang antusias dalam belajar teknologi web dan desain antarmuka. Siap untuk belajar, berkolaborasi, dan memberikan kontribusi terbaik di dunia kerja.
+                Siswa SMK yang memiliki passion dalam merakit komponen sirkuit, merancang desain PCB, dan memprogram mikrokontroler. Siap mengintegrasikan perangkat keras dan lunak di dunia industri nyata.
             </p>
-            <a href="#portofolio" class="btn">Lihat Portofolio</a>
+            <a href="#portofolio" class="btn">Lihat Proyek</a>
         </div>
     </section>
 
-    <!-- === TENTANG SAYA === -->
+    <!-- TENTANG SAYA -->
     <section id="tentang">
         <div class="container">
-            <h2 class="section-title">Tentang Saya</h2>
+            <h2 class="section-title">Tentang <span>Saya</span></h2>
             <div class="about-content">
                 <div class="about-image">
-                    <!-- GANTI ATRIBUT SRC DENGAN LINK FOTOMU (Ganti placeholder di bawah) -->
+                    <!-- Ganti atribut src dengan link fotomu -->
                     <img src="https://via.placeholder.com/300x300.png?text=Foto+Profil" alt="Foto Budi">
                 </div>
                 <div class="about-text">
-                    <!-- GANTI DESKRIPSI DI BAWAH -->
-                    <h3>Siswa SMK yang Siap Menghadapi Industri</h3>
+                    <h3 style="color: var(--primary-color); margin-bottom: 15px;">Membangun Sistem dari Nol.</h3>
+                    <p>Halo! Saya adalah siswa kelas XII di SMK Negeri 4 Bandung jurusan <strong>Teknik Audio Video</strong>. Saya sangat tertarik dengan otomatisasi industri, Internet of Things (IoT), dan robotika.</p>
                     <br>
-                    <p>Halo! Saya adalah siswa kelas XII di SMK Negeri 1 Contohkota jurusan Rekayasa Perangkat Lunak (RPL). Saya memiliki minat yang besar dalam pembuatan website modern yang responsif dan user-friendly.</p>
-                    <br>
-                    <p>Selama bersekolah, saya terbiasa bekerja dalam tim, menyelesaikan tugas tepat waktu, dan terus belajar hal baru. Saya sedang mencari kesempatan magang (PKL) / bekerja untuk mempraktikkan ilmu yang telah saya pelajari.</p>
+                    <p>Bagi saya, merangkai komponen di atas <i>breadboard</i> atau menyolder di atas PCB adalah sebuah seni. Saya terbiasa membaca skematik elektronika, menggunakan <i>multitester</i>, dan memprogram Arduino. Saat ini saya sedang mencari peluang magang (PKL) untuk mengembangkan keterampilan praktis saya di industri.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- === KEAHLIAN (SKILLS) === -->
-    <section id="keahlian" style="background-color: #fff;">
+    <!-- KEAHLIAN (SKILLS) -->
+    <section id="keahlian">
         <div class="container">
-            <h2 class="section-title">Keahlian Saya</h2>
+            <h2 class="section-title">Spesifikasi <span>Keahlian</span></h2>
             
-            <h3 style="text-align: center; margin-bottom: 20px;">Hard Skills (Keahlian Jurusan)</h3>
-            <div class="skills-container" style="margin-bottom: 40px;">
-                <!-- TAMBAH / HAPUS KEAHLIAN DI SINI -->
-                <div class="skill-tag">HTML5 & CSS3</div>
-                <div class="skill-tag">JavaScript Dasar</div>
-                <div class="skill-tag">UI/UX Design (Figma)</div>
-                <div class="skill-tag">Instalasi Jaringan (LAN)</div>
-                <div class="skill-tag">Microsoft Office</div>
+            <h3 class="tech-font" style="text-align: center; margin-bottom: 20px;">[ Hardware & Software ]</h3>
+            <div class="skills-container" style="margin-bottom: 50px;">
+                <!-- GANTI / TAMBAHKAN KEAHLIAN TEKNIK DI SINI -->
+                <div class="skill-tag">Menyolder & Perakitan</div>
+                <div class="skill-tag">Membaca Skematik Rangkaian</div>
+                <div class="skill-tag">Arduino (C/C++)</div>
+                <div class="skill-tag">Internet of Things (ESP8266/ESP32)</div>
+                <div class="skill-tag">Desain PCB (Eagle/Proteus)</div>
+                <div class="skill-tag">Pengukuran (Multimeter & Osiloskop)</div>
             </div>
 
-            <h3 style="text-align: center; margin-bottom: 20px;">Soft Skills</h3>
+            <h3 class="tech-font" style="text-align: center; margin-bottom: 20px;">[ Soft Skills ]</h3>
             <div class="skills-container">
-                <div class="skill-tag">Kerja Sama Tim</div>
-                <div class="skill-tag">Komunikasi Baik</div>
-                <div class="skill-tag">Disiplin Waktu</div>
-                <div class="skill-tag">Problem Solving</div>
+                <div class="skill-tag">Troubleshooting Masalah</div>
+                <div class="skill-tag">Keselamatan Kerja (K3)</div>
+                <div class="skill-tag">Kerja Tim</div>
+                <div class="skill-tag">Analitis & Teliti</div>
             </div>
         </div>
     </section>
 
-    <!-- === PORTOFOLIO / PROYEK === -->
+    <!-- PORTOFOLIO / PROYEK ELEKTRONIKA -->
     <section id="portofolio">
         <div class="container">
-            <h2 class="section-title">Proyek & Tugas Praktik</h2>
+            <h2 class="section-title">Dokumentasi <span>Proyek</span></h2>
             <div class="grid-layout">
                 
-                <!-- KARTU PROYEK 1 -->
+                <!-- PROYEK 1 -->
                 <div class="card">
-                    <!-- GANTI GAMBAR PROYEK -->
-                    <img src="https://via.placeholder.com/600x400.png?text=Foto+Proyek+1" alt="Proyek 1">
+                    <img src="https://via.placeholder.com/600x400.png?text=Foto+Smart+Home" alt="Smart Home IoT">
                     <div class="card-content">
-                        <h3 class="card-title">Website Company Profile</h3>
-                        <p class="card-desc">Tugas akhir semester membuat website profil perusahaan statis menggunakan HTML, CSS, dan Flexbox.</p>
-                        <!-- GANTI LINK DEMO / GITHUB -->
-                        <a href="https://github.com/username-kamu/proyek1" target="_blank" class="btn">Lihat Kode / Demo</a>
+                        <h3 class="card-title">Prototipe Smart Home (IoT)</h3>
+                        <p class="card-desc">Membuat sistem kontrol lampu dan suhu ruangan jarak jauh menggunakan NodeMCU ESP8266, Relay, dan aplikasi Blynk di smartphone.</p>
+                        <a href="https://github.com/username-kamu" target="_blank" class="btn">Detail Skematik</a>
                     </div>
                 </div>
 
-                <!-- KARTU PROYEK 2 -->
+                <!-- PROYEK 2 -->
                 <div class="card">
-                    <img src="https://via.placeholder.com/600x400.png?text=Foto+Proyek+2" alt="Proyek 2">
+                    <img src="https://via.placeholder.com/600x400.png?text=Foto+Robot+Line+Follower" alt="Robot Line Follower">
                     <div class="card-content">
-                        <h3 class="card-title">Desain UI Aplikasi Kasir</h3>
-                        <p class="card-desc">Merancang purwarupa (prototype) aplikasi kasir untuk UMKM menggunakan Figma.</p>
-                        <a href="#" target="_blank" class="btn">Lihat Desain</a>
+                        <h3 class="card-title">Robot Line Follower Analog</h3>
+                        <p class="card-desc">Merakit dan menyolder robot pengikut garis dari awal tanpa mikrokontroler, menggunakan sensor fotodiode dan IC komparator (LM324).</p>
+                        <a href="#" target="_blank" class="btn">Lihat Video</a>
                     </div>
                 </div>
 
-                <!-- KARTU PROYEK 3 -->
+                <!-- PROYEK 3 -->
                 <div class="card">
-                    <img src="https://via.placeholder.com/600x400.png?text=Foto+Proyek+3" alt="Proyek 3">
+                    <img src="https://via.placeholder.com/600x400.png?text=Foto+Power+Supply" alt="Power Supply">
                     <div class="card-content">
-                        <h3 class="card-title">Topologi Jaringan Warnet</h3>
-                        <p class="card-desc">Proyek simulasi Cisco Packet Tracer untuk mengatur routing dan IP di sebuah jaringan lokal.</p>
-                        <a href="#" class="btn">Lihat Detail</a>
+                        <h3 class="card-title">Catu Daya (Power Supply) Variable</h3>
+                        <p class="card-desc">Tugas akhir merancang catu daya DC variable (0-24V) menggunakan trafo step-down dan IC regulator tegangan (LM317) lengkap dengan desain PCB sendiri.</p>
+                        <a href="#" class="btn">Lihat Proses</a>
                     </div>
                 </div>
 
@@ -390,30 +370,29 @@
         </div>
     </section>
 
-    <!-- === EKSTRAKURIKULER & ORGANISASI === -->
-    <section id="ekskul" style="background-color: #fff;">
+    <!-- EKSTRAKURIKULER -->
+    <section id="ekskul">
         <div class="container">
-            <h2 class="section-title">Ekstrakurikuler & Organisasi</h2>
+            <h2 class="section-title">Aktivitas <span>Organisasi</span></h2>
             <div class="grid-layout">
                 
-                <!-- KARTU EKSKUL 1 -->
+                <!-- EKSKUL 1 -->
                 <div class="card">
-                    <!-- GANTI GAMBAR KEGIATAN -->
-                    <img src="https://via.placeholder.com/600x400.png?text=Foto+Kegiatan+OSIS" alt="OSIS">
+                    <img src="https://via.placeholder.com/600x400.png?text=Foto+Ekskul+Robotika" alt="Robotika">
                     <div class="card-content">
-                        <h3 class="card-title">Pengurus OSIS</h3>
-                        <p style="color: var(--primary-color); font-weight: 600; margin-bottom: 10px;">Sekretaris 1 (2022 - 2023)</p>
-                        <p class="card-desc">Bertanggung jawab dalam pembuatan proposal kegiatan, mencatat notulensi rapat, dan mengelola arsip organisasi sekolah.</p>
+                        <h3 class="card-title">Klub Robotika Sekolah</h3>
+                        <p class="tech-font" style="margin-bottom: 10px; font-size: 0.9rem;">Ketua Divisi Hardware (2022 - 2023)</p>
+                        <p class="card-desc">Membimbing adik kelas dalam merangkai komponen dasar dan memimpin tim perakitan sasis robot untuk kompetisi tingkat provinsi.</p>
                     </div>
                 </div>
 
-                <!-- KARTU EKSKUL 2 -->
+                <!-- EKSKUL 2 -->
                 <div class="card">
-                    <img src="https://via.placeholder.com/600x400.png?text=Foto+Kegiatan+Pramuka" alt="Pramuka">
+                    <img src="https://via.placeholder.com/600x400.png?text=Foto+Pramuka" alt="Pramuka">
                     <div class="card-content">
-                        <h3 class="card-title">Pramuka Ambalan</h3>
-                        <p style="color: var(--primary-color); font-weight: 600; margin-bottom: 10px;">Anggota Aktif (2021 - Sekarang)</p>
-                        <p class="card-desc">Aktif dalam kegiatan kepanduan, melatih kedisiplinan, kemandirian, dan pernah menjadi panitia Perkemahan Jumat Sabtu (Perjusa).</p>
+                        <h3 class="card-title">ORBIT4</h3>
+                        <p class="tech-font" style="margin-bottom: 10px; font-size: 0.9rem;">Anggota (2024 - Sekarang)</p>
+                        <p class="card-desc">Organisasi IT di SMKN 4 Bandung.</p>
                     </div>
                 </div>
 
@@ -421,29 +400,32 @@
         </div>
     </section>
 
-    <!-- === FOOTER & KONTAK === -->
+    <!-- FOOTER & KONTAK -->
     <footer id="kontak">
         <div class="container">
             <h2 style="margin-bottom: 20px;">Mari Berkolaborasi!</h2>
-            <p style="margin-bottom: 20px; color: #cbd5e1;">Tertarik untuk merekrut saya sebagai anak PKL atau karyawan? Silakan hubungi saya melalui:</p>
+            <p style="margin-bottom: 30px; color: var(--text-light); max-width: 500px; margin-left: auto; margin-right: auto;">
+                Mencari tenaga magang yang cekatan dengan solder dan komponen? Hubungi saya untuk diskusi lebih lanjut.
+            </p>
             
-            <div class="social-links">
-                <!-- GANTI LINK SOSIAL MEDIA DI BAWAH (Ganti atribut href="") -->
-                <a href="mailto:emailkamu@gmail.com">Email</a> | 
-                <a href="https://github.com/username-kamu" target="_blank">GitHub</a> | 
-                <a href="https://linkedin.com/in/username-kamu" target="_blank">LinkedIn</a> | 
-                <a href="https://instagram.com/username-kamu" target="_blank">Instagram</a>
+            <div class="social-links" style="margin-bottom: 40px;">
+                <a href="mailto:nafilalghaly@gmail.com" class="btn">Kirim Email</a>
             </div>
 
-            <p style="margin-top: 30px; font-size: 0.9rem; color: #94a3b8;">
-                &copy; 2023 Budi Santoso. Dibuat dengan HTML & CSS murni.
+            <div class="social-links">
+                <a href="https://github.com/nafil22" target="_blank">GitHub</a> | 
+                <a href="https://linkedin.com/in/nafil22" target="_blank">LinkedIn</a> | 
+                <a href="https://instagram.com/_naf1l" target="_blank">Instagram</a>
+            </div>
+
+            <p class="tech-font" style="margin-top: 40px; font-size: 0.85rem; color: #475569;">
+                &copy; 2026 Muhammad Nafil. System Offline.
             </p>
         </div>
     </footer>
 
-    <!-- === JAVASCRIPT UNTUK MENU HP === -->
+    <!-- SCRIPT -->
     <script>
-        // Logika sederhana untuk membuat tombol menu (hamburger) berfungsi di HP
         const menuToggle = document.getElementById('mobile-menu');
         const navLinks = document.getElementById('nav-links');
 
@@ -451,7 +433,6 @@
             navLinks.classList.toggle('active');
         });
 
-        // Menutup menu jika salah satu link diklik (khusus HP)
         const links = document.querySelectorAll('.nav-links li a');
         links.forEach(link => {
             link.addEventListener('click', () => {
